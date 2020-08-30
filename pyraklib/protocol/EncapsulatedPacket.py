@@ -54,11 +54,11 @@ class EncapsulatedPacket:
             packet.identifierACK = None
 
         if packet.reliability > 0:
-            if (packet.reliability > 2 or packet.reliability == 2) and packet.reliability is not 5:
+            if (packet.reliability > 2 or packet.reliability == 2) and packet.reliability != 5:
                 packet.messageIndex = Binary.readLTriad(binary[offset:offset+3])
                 offset += 3
 
-            if (packet.reliability < 4 or packet.reliability == 4) and packet.reliability is not 2:
+            if (packet.reliability < 4 or packet.reliability == 4) and packet.reliability != 2:
                 packet.orderIndex = Binary.readLTriad(binary[offset:offset+3])
                 offset += 3
                 packet.orderChannel = Binary.readByte(binary[offset:offset+1])
@@ -79,9 +79,9 @@ class EncapsulatedPacket:
 
     def getTotalLength(self):
         length = 3 + len(self.buffer)
-        if self.messageIndex is not None:
+        if self.messageIndex != None:
             length += 3
-        if self.orderIndex is not None:
+        if self.orderIndex != None:
             length += 4
         if self.hasSplit:
             length += 10
