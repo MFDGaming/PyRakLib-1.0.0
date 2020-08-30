@@ -102,9 +102,9 @@ class EncapsulatedPacket:
             payload += (Binary.writeShort(len(self.buffer) << 3))
 
         if self.reliability > 0:
-            if (self.reliability > 2 or self.reliability == 2) and self.reliability is not 5:
+            if (self.reliability > 2 or self.reliability == 2) and self.reliability != 5:
                 payload += (Binary.writeLTriad(self.messageIndex))
-            if (self.reliability < 4 or self.reliability == 4) and self.reliability is not 2:
+            if (self.reliability < 4 or self.reliability == 4) and self.reliability != 2:
                 payload += (Binary.writeLTriad(self.orderIndex))
                 payload += (Binary.writeByte(self.orderChannel))
 
