@@ -82,9 +82,9 @@ class SessionManager:
 
         while not self.shutdown:
             start = microtime(True)
-            max = 5000
-
-            while --max and self.receivePacket():
+            max = 4999
+            
+            while max and self.receivePacket():
                pass
             while self.receiveStream():
                pass
