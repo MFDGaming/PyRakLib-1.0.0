@@ -284,7 +284,7 @@ class Session:
             self.handleEncapsulatedPacketRoute(pk)
 
     def handleEncapsulatedPacket(self, packet):
-        if packet.messageIndex is None:
+        if packet.messageIndex == None:
             self.handleEncapsulatedPacketRoute(packet)
         else:
             if packet.messageIndex < self.reliableWindowStart or packet.messageIndex > self.reliableWindowEnd:
