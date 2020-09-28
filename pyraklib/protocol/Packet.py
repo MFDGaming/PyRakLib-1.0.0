@@ -68,9 +68,9 @@ class Packet:
     def feof(self) -> bool:
         try:
             self.buffer[self.offset]
-            return True
-        except IndexError:
             return False
+        except IndexError:
+            return True
 
     def put(self, data: bytearray):
         self.buffer += data
