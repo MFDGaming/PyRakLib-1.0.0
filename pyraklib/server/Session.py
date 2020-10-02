@@ -151,8 +151,8 @@ class Session:
                 self.recoveryQueue[pk.seqNumber] = pk
                 del self.packetToSend[k]
                 self.sendPacket(pk)
-
-                if --limit < 0 or --limit == 0:
+                limit -= 1
+                if limit < 0 or limit == 0:
                     break
 
             if len(self.packetToSend) > self.WINDOW_SIZE:
