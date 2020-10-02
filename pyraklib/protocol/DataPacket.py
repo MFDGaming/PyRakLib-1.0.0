@@ -59,7 +59,7 @@ class DataPacket(Packet):
         self.seqNumber = self.getLTriad()
         while not self.feof():
             offset = 0
-            data = self.buffer[0:offset]
+            data = self.buffer[self.offset:]
             packet, offsetReturned = EncapsulatedPacket.fromBinary(data, False, offset)
             self.offset += offsetReturned
             if len(packet.buffer) == 0:
