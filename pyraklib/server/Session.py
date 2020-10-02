@@ -400,7 +400,7 @@ class Session:
                         try:
                             self.receivedWindow[i]
                         except IndexError:
-                            self.NACKQueue[i] = i
+                            self.NACKQueue.insert(i, i)
                         i += 1
 
                 if diff >= 1:
