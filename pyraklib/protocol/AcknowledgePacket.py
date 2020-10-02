@@ -26,7 +26,7 @@ from ..protocol.Packet import Packet
 
 class AcknowledgePacket(Packet):
 
-    seqNums = ()
+    seqNums = []
 
     @staticmethod
     @abstractmethod
@@ -82,7 +82,7 @@ class AcknowledgePacket(Packet):
     def _decode(self):
         self.get()
         count = self.getShort()
-        self.seqNums = ()
+        self.seqNums = []
         cnt = 0
         i = 0
         while i < count and not self.feof() and cnt < 4096:
@@ -94,13 +94,13 @@ class AcknowledgePacket(Packet):
                 c = start
                 while c == end or c < end:
                     cnt =+ 1
-                    self.seqNums[cnt] = c
+                    self.seqNums.insert(cnt, c)
                     c =+ 1
             else:
                 cnt =+ 1
-                self.seqNums[cnt] = self.getLTriad()
+                self.seqNums.insert(cnt, self.getLTriad())
             i =+ 1
 
     def clean(self):
         super().clean()
-        self.seqNums = ()
+        self.seqNums = []
