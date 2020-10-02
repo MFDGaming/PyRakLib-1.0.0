@@ -82,17 +82,15 @@ class SessionManager:
 
         while not self.shutdown:
             start = microtime(True)
-            max = 4999
+            max = 5000
             
-            while max and self.receivePacket():
-               pass
-            while self.receiveStream():
-               pass
-
-            time_ = microtime(True) - start
-            if time_ < 0.05:
-                time.sleep((microtime(True) + 0.05 - time_) - time.time())
-            self.tick()
+            while max > 0 and self.receivePacket():
+                max -= 1
+                while self.receiveStream():
+                    time_ = microtime(True) - start
+                    if time_ < 0.05:
+                        time.sleep((microtime(True) + 0.05 - time_) - time.time())
+                        self.tick()
 
     def tick(self):
         time_ = microtime(True)
